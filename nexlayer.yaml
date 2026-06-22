@@ -1,0 +1,21 @@
+application:
+  name: ntfy
+  pods:
+  - name: app
+    image: binwiederhier/ntfy:latest
+    path: /
+    servicePorts:
+    - 80
+    vars:
+      NTFY_BASE_URL: "https://relaxed-weasel-ntfy.cloud.nexlayer.ai"
+      NTFY_LISTEN_HTTP: ":80"
+      NTFY_CACHE_FILE: "/var/cache/ntfy/cache.db"
+      NTFY_AUTH_FILE: "/var/lib/ntfy/auth.db"
+      NTFY_AUTH_DEFAULT_ACCESS: "deny-all"
+    volumes:
+    - name: ntfy-cache
+      mountPath: /var/cache/ntfy
+      size: 2Gi
+    - name: ntfy-lib
+      mountPath: /var/lib/ntfy
+      size: 2Gi
